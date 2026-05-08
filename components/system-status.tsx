@@ -28,7 +28,6 @@ function SystemStatus() {
                 <CardContent className='mb-0'>
                     <div className="">
                         {systems.map((system, index) => (
-                            <>
                             <div key={index} className="flex items-center justify-between mb-2">
                                 <p className="font-medium items-center flex gap-3">
                                     <span className="size-2 inline-block rounded-full bg-green-600 "></span>
@@ -37,8 +36,6 @@ function SystemStatus() {
                                 <p className="text-sm text-muted-foreground">{system.status}</p>
                                 
                             </div>
-                            {/* {index < systems.length - 1 && <Separator className='my-2'/>} */}
-                            </>
                         ))}
                     </div>
                 </CardContent>

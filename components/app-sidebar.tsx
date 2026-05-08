@@ -32,41 +32,41 @@ const data = {
     },
     {
       title: "Conversations",
-      url: "/conversations",
+      url: "/dashboard/conversations",
       icon: MessageCircle,
     },
     {
       title: "Leads",
-      url: "/leads",
+      url: "/dashboard/leads",
       icon: UserCheck,
     },
     {
       title: "Unanswered",
-      url: "/unanswered",
+      url: "/dashboard/unanswered",
       icon: Info,
     },
   ],
   manage: [
     {
       title: "AI Agent",
-      url: "/ai-agent",
+      url: "/dashboard/ai-agent",
       icon: Bot,
     },
     {
       title: "Knowledge Base",
-      url: "/knowledge-base",
+      url: "/dashboard/knowledge-base",
       icon: BookOpen,
     },
     {
       title: "Aanlytics",
-      url: "/analytics",
+      url: "/dashboard/analytics",
       icon: ChartColumnBig,
     },
   ],
   navSecondary: [
     {
       name: "Settings",
-      url: "#",
+      url: "/dashboard/settings",
       icon: Settings2Icon
     },
   ],
