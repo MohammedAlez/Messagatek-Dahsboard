@@ -38,9 +38,9 @@ export function NavSecondary({
                     href={item.url}
                     className={`p-5 py-6 rounded-xl cursor-pointer ${
                       isActive
-                        ? "bg-purple-700 text-white hover:bg-transparent"
-                        : "hover:bg-gray-200"
-                    }`}
+                          ? "bg-purple-500 text-white hover:bg-purple-500 hover:text-white"
+                          : "hover:bg-gray-200 "
+                      }`}
                   >
                     {item.icon && <item.icon className="w-5 h-5 size-5!" />}
                     <span>{item.name}</span>

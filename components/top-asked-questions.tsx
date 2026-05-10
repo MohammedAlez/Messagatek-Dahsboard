@@ -12,31 +12,31 @@ function TopAskedQuestions() {
 
   return (
     <div className="">
-        <Card>
-        <CardHeader>
-            <div>
-            <CardTitle>Top asked courses</CardTitle>
-            </div>
-        </CardHeader>
+        <Card className='h-full flex-1'>
+            <CardHeader>
+                <div>
+                <CardTitle>Top asked courses</CardTitle>
+                </div>
+            </CardHeader>
 
-        <CardContent>
-            <div className="space-y-4">
-            {courses.map((course) => (
-                <div key={course.id} className="space-y-2">
-                <div className="flex items-center justify-between gap-3 text-sm font-medium text-foreground">
-                    <span>{course.label}</span>
-                    <span className="text-muted-foreground">{course.count}</span>
+            <CardContent>
+                <div className="space-y-4">
+                {courses.map((course) => (
+                    <div key={course.id} className="space-y-2">
+                    <div className="flex items-center justify-between gap-3 text-sm font-medium text-foreground">
+                        <span>{course.label}</span>
+                        <span className="text-muted-foreground">{course.count}</span>
+                    </div>
+                    <div className="h-2 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
+                        <div
+                        className={`${course.color} h-full rounded-full`}
+                        style={{ width: course.width }}
+                        />
+                    </div>
+                    </div>
+                ))}
                 </div>
-                <div className="h-2 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
-                    <div
-                    className={`${course.color} h-full rounded-full`}
-                    style={{ width: course.width }}
-                    />
-                </div>
-                </div>
-            ))}
-            </div>
-        </CardContent>
+            </CardContent>
         </Card>
     </div>
     )

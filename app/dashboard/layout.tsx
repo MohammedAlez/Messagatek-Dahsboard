@@ -18,7 +18,6 @@ export default function Layout({
     >
       <AppSidebar variant="inset" />
       <SidebarInset>
-        <SiteHeader title="Dashboard"/>
         {children}
       </SidebarInset>
     </SidebarProvider>
