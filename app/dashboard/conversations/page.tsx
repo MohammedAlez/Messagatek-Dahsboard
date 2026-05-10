@@ -55,7 +55,7 @@ function Page() {
         )}>
           
           {/* VIEW 1: Sidebar */}
-          <div className="w-1/2 lg:w-[400px] h-full p-4 lg:p-0">
+          <div className="w-1/2 lg:w-100 h-full p-4 lg:p-0">
             <ConversationSidebar 
               selectedId={selectedChatId} 
               onSelect={setSelectedChatId} 

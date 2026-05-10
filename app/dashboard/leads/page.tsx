@@ -1,15 +1,22 @@
+import { LeadsCards } from '@/components/leads-cards'
+import LeadsFilters from '@/components/leads-filters'
+import { LeadsHeader } from '@/components/leads-screen-header'
+import { LeadsTable } from '@/components/leads-table'
+import { SiteHeader } from '@/components/site-header'
 import React from 'react'
 
 function Page() {
   return (
-    <div className="flex flex-1 flex-col">
-      <div className="@container/main flex flex-1 flex-col gap-2">
-        <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-          <h1 className="text-2xl font-bold">Leads</h1>
-          {/* Add your leads content here */}
-        </div>
-      </div>
-    </div>
+    <>
+      <SiteHeader title='Leads'/>
+      <main className="container mx-auto px-4">
+        <LeadsHeader />
+        {/* We will add StatsGrid here next */}
+        <LeadsCards />
+        <LeadsFilters />
+        <LeadsTable />
+      </main>
+    </>
   )
 }
 
