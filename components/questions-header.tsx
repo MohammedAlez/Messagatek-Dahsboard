@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-export function LeadsHeader() {
+export function QuestionsHeader() {
   return (
     <div className="flex flex-wrap items-center justify-between gap-4 py-4">
       {/* Search Input */}

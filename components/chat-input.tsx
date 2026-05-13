@@ -34,7 +34,7 @@ function ChatInput() {
               <Button 
                 variant="outline" 
                 onClick={() => setIsReplying(true)}
-                className="rounded-full gap-2 bg-purple-600 hover:bg-purple-700 text-white hover:text-white cursor-pointer border-none px-8 h-12 shadow-lg shadow-purple-500/20 active:scale-95 transition-transform"
+                className="rounded-full gap-2 bg-indigo-600 hover:bg-indigo-700 text-white hover:text-white cursor-pointer border-none px-8 h-12 shadow-lg shadow-indigo-500/20 active:scale-95 transition-transform"
               >
                 <MessageCircle className="w-4 h-4" />
                 Reply Manually
@@ -54,7 +54,7 @@ function ChatInput() {
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsReplying(false)}
-                className="shrink-0 size-10 lg:size-11 active:scale-95 bg-purple-600 hover:bg-purple-600 cursor-pointer text-muted-foreground hover:text-foreground rounded-xl"
+                className="shrink-0 size-10 lg:size-11 active:scale-95 bg-indigo-600 hover:bg-indigo-600 cursor-pointer text-muted-foreground hover:text-foreground rounded-xl"
               >
                 <Sparkles className="size-4 lg:size-5 text-white" />
               </Button>
@@ -66,7 +66,7 @@ function ChatInput() {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                  className="bg-muted/50 text-sm lg:text-base text-foreground focus-visible:ring-2 focus-visible:ring-purple-500/30 h-11 lg:h-12 rounded-2xl border-none px-4"
+                  className="bg-muted/50 text-sm lg:text-base text-foreground focus-visible:ring-2 focus-visible:ring-indigo-500/30 h-11 lg:h-12 rounded-2xl border-none px-4"
                 />
                 
                 <motion.div
@@ -78,7 +78,7 @@ function ChatInput() {
                     size="icon" 
                     onClick={handleSend}
                     disabled={!message.trim()}
-                    className="bg-purple-600 active:scale-95 hover:bg-purple-700 shrink-0 size-10 lg:size-11 rounded-xl shadow-md disabled:opacity-50 transition-all"
+                    className="bg-indigo-600 active:scale-95 hover:bg-indigo-700 shrink-0 size-10 lg:size-11 rounded-xl shadow-md disabled:opacity-50 transition-all"
                   >
                     <Send className="size-4 lg:size-5 text-white" />
                   </Button>

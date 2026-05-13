@@ -7,50 +7,53 @@ import {
   GraduationCap,
   TrendingUpIcon,
   TrendingDownIcon,
+  HelpCircle,
+  MessageSquareX,
+  UserCheck,
+  Database,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const cards = [
   {
-    label:     "Total Leads",
-    value:     35,
-    trend:     { direction: "up", label: "+5 this week" },
-    icon:      Users,
+    label:     "Total Unanswered",
+    value:     23,
+    subText:   "this week",
+    icon:      HelpCircle,
+    iconBg:    "bg-zinc-500/20",
+    iconColor: "text-zinc-400",
+  },
+  {
+    label:     "Open",
+    value:     7,
+    subText:   "need attention",
+    icon:      MessageSquareX,
     iconBg:    "bg-orange-500/20",
     iconColor: "text-orange-400",
   },
   {
-    label:     "New",
-    value:     3,
-    trend:     { direction: "up", label: "+3" },
-    icon:      UserPlus,
-    iconBg:    "bg-violet-500/20",
-    iconColor: "text-violet-400",
-  },
-  {
-    label:     "Contacted",
-    value:     15,
-    trend:     { direction: "down", label: "-2" },
-    icon:      PhoneCall,
-    iconBg:    "bg-amber-500/20",
-    iconColor: "text-amber-400",
-  },
-  {
-    label:     "Enrolled",
-    value:     7,
-    trend:     { direction: "up", label: "+2" },
-    icon:      GraduationCap,
+    label:     "Handled by Team",
+    value:     12,
+    subText:   "team replied",
+    icon:      UserCheck,
     iconBg:    "bg-emerald-500/20",
     iconColor: "text-emerald-400",
   },
+  {
+    label:     "Added to KB",
+    value:     4,
+    subText:   "AI improved",
+    icon:      Database,
+    iconBg:    "bg-indigo-500/20",
+    iconColor: "text-indigo-400",
+  },
 ]
-
-export function LeadsCards() {
+export function QuestionsCards() {
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
       {cards.map((card) => {
         const Icon = card.icon
-        const isUp = card.trend.direction === "up"
+        // const isUp = card.trend.direction === "up"
         return (
           <div
             key={card.label}

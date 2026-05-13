@@ -12,9 +12,11 @@ function Page() {
       <main className="container mx-auto px-4">
         <LeadsHeader />
         {/* We will add StatsGrid here next */}
-        <LeadsCards />
-        <LeadsFilters />
-        <LeadsTable />
+        <div className="mt-4">
+          <LeadsCards />
+          <LeadsFilters />
+          <LeadsTable />
+        </div>
       </main>
     </>
   )

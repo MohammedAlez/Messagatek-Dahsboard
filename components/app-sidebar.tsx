@@ -81,11 +81,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="data-[slot=sidebar-menu-button]:p-1.5!"
+              className="data-[slot=sidebar-menu-button]:p-1.5! hover:bg-transparent"
             >
               <a href="#">
-                <Rainbow className="size-12! text-purple-600" />
-                <span className="text-xl font-semibold ml-2">messagatek</span>
+                <Rainbow className="size-12! text-indigo-600" />
+                <span className="text-2xl font-semibold ml-2 ">messagatek</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

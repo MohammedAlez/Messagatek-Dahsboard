@@ -8,13 +8,13 @@ function ChatHeader() {
     <div className='px-2 flex items-center justify-between border-b border-border py-4'>
         <div className="flex justify-center gap-2">
             <div className="relative">
-                    <Avatar size="lg" className="bg-muted">
+                    <Avatar size="lg" className="bg-muted ">
                         <AvatarImage src="https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png" alt={"user bg"} />
                     </Avatar>
                 </div>
             <div className="flex flex-col items-start justify-center">
-                <span className='font-bold'>John Doe</span>
-                <span className="">+12343242342</span>
+                <span className='font-bold text-sm'>John Doe</span>
+                <span className="text-xs">+12343242342</span>
             </div>
         </div>
         <div className="space-x-2">

@@ -66,8 +66,8 @@ function ChatMessages() {
                 className={cn(
                   "px-4 py-3 rounded-2xl text-[13px] shadow-sm leading-relaxed",
                   msg.isUser 
-                    ? "bg-[#F3E8FF] text-purple-950 rounded-tr-none border border-purple-100" 
-                    : "bg-[#1E293B] text-slate-50 rounded-tl-none shadow-md shadow-slate-200/50"
+                    ? "bg-indigo-100d bg-muted text-indigo-950 rounded-tr-none border border-indigo-100" 
+                    : "bg-indigo-100 text-indigo-700 rounded-tl-none shadow-md shadow-slate-200/50"
                 )}
               >
                 {msg.content}
@@ -75,7 +75,7 @@ function ChatMessages() {
               
               {/* Footer: Time & Status */}
               <div className="flex items-center gap-1.5 mt-1.5 px-1">
-                {msg.isUser && <Check className="w-3.5 h-3.5 text-purple-400" />}
+                {msg.isUser && <Check className="w-3.5 h-3.5 text-indigo-400" />}
                 <span className="text-[10px] font-medium text-muted-foreground">
                   {msg.timestamp}
                 </span>

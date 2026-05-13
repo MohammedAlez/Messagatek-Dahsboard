@@ -39,7 +39,7 @@ export function NavMain({
                   variant='default'
                   className={`p-5 py-6 rounded-xl cursor-pointer transition ${
                     isActive
-                      ? "bg-purple-500 text-white hover:bg-purple-500 hover:text-white"
+                      ? "bg-indigo-100/80 text-indigo-600 hover:bg-indigo-100/80 hover:text-indigo-600"
                       : "hover:bg-secondary "
                   }`}
                 >

@@ -6,13 +6,13 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 
 const filters = [
   { id: "all", label: "All" },
-  { id: "ai-handling", label: "AI handling" },
-  { id: "escalated", label: "Escalated" },
-  { id: "lead-saved", label: "Lead saved" },
+  { id: "open", label: "Open" },
+  { id: "handled", label: "Handled" },
+  { id: "added-to-kb", label: "Added to KB" },
 ]
 
 
-function LeadsFilters() {
+export function QuestionsFilters() {
   return (
     <div className='py-4 flex flex-col gap-2 lg:flex-row justify-between'>
 
@@ -50,4 +50,3 @@ function LeadsFilters() {
   )
 }
 
-export default LeadsFilters

@@ -81,7 +81,7 @@
 //             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
 //             <Input
 //               placeholder="Search chats"
-//               className="pl-9 pr-3 h-9 bg-muted/50 border-none focus-visible:ring-purple-500"
+//               className="pl-9 pr-3 h-9 bg-muted/50 border-none focus-visible:ring-indigo-500"
 //               aria-label="Search chats"
 //             />
 //           </div>
@@ -94,7 +94,7 @@
 //                 className={cn(
 //                   "rounded-full border px-3 py-1 text-xs font-medium transition",
 //                   index === 0
-//                     ? "border-purple-500/20 bg-purple-100 text-purple-700 hover:bg-purple-200"
+//                     ? "border-indigo-500/20 bg-indigo-100 text-indigo-700 hover:bg-indigo-200"
 //                     : "border-transparent bg-muted text-muted-foreground hover:bg-muted/80"
 //                 )}
 //               >
@@ -115,7 +115,7 @@
 //                 className={cn(
 //                   "group flex w-full items-start gap-3 rounded-2xl p-4 text-left transition relative",
 //                   isActive
-//                     ? "bg-purple-600 shadow-lg shadow-purple-500/20"
+//                     ? "bg-indigo-600 shadow-lg shadow-indigo-500/20"
 //                     : "bg-transparent hover:bg-muted/50"
 //                 )}
 //               >
@@ -124,7 +124,7 @@
 //                     {chat.avatar ? (
 //                       <AvatarImage src={chat.avatar} alt={chat.name} />
 //                     ) : (
-//                       <AvatarFallback className={cn(isActive ? "bg-purple-400 text-white" : "")}>
+//                       <AvatarFallback className={cn(isActive ? "bg-indigo-400 text-white" : "")}>
 //                         {chat.name.split(" ").map((n) => n[0]).join("")}
 //                       </AvatarFallback>
 //                     )}
@@ -147,7 +147,7 @@
 //                       </p>
 //                       <p className={cn(
 //                         "truncate text-[11px]",
-//                         isActive ? "text-purple-100" : "text-muted-foreground"
+//                         isActive ? "text-indigo-100" : "text-muted-foreground"
 //                       )}>
 //                         {chat.phone}
 //                       </p>
@@ -155,7 +155,7 @@
 //                     <div className="flex shrink-0 flex-col items-end gap-1 text-right">
 //                       <span className={cn(
 //                         "text-[10px]",
-//                         isActive ? "text-purple-200" : "text-muted-foreground"
+//                         isActive ? "text-indigo-200" : "text-muted-foreground"
 //                       )}>
 //                         {chat.time}
 //                       </span>
@@ -176,7 +176,7 @@
 
 //                   <div className={cn(
 //                     "mt-2 text-xs line-clamp-1",
-//                     isActive ? "text-purple-50" : "text-muted-foreground"
+//                     isActive ? "text-indigo-50" : "text-muted-foreground"
 //                   )}>
 //                     {chat.preview}
 //                   </div>
@@ -286,7 +286,7 @@ function ConversationSidebar({ selectedId, onSelect }: SidebarProps) {
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               placeholder="Search chats"
-              className="pl-9 pr-3 h-9 bg-muted/50 border-none focus-visible:ring-purple-500"
+              className="pl-9 pr-3 h-9 bg-muted/50 border-none focus-visible:ring-indigo-500"
             />
           </div>
           <div className="flex flex-wrap gap-1">
@@ -295,7 +295,7 @@ function ConversationSidebar({ selectedId, onSelect }: SidebarProps) {
                 key={filter.id}
                 className={cn(
                   "rounded-full border px-2 py-1 text-[11px] font-medium transition",
-                  index === 0 ? "bg-purple-100 text-purple-700" : "bg-muted text-muted-foreground"
+                  index === 0 ? "bg-indigo-100 text-indigo-700" : "bg-muted text-muted-foreground"
                 )}
               >
                 {filter.label}
@@ -313,14 +313,14 @@ function ConversationSidebar({ selectedId, onSelect }: SidebarProps) {
                 onClick={() => onSelect(chat.id)}
                 className={cn(
                   "group flex w-full items-start gap-3 rounded-2xl p-4 text-left transition",
-                  isActive ? "bg-purple-600 shadow-lg" : "hover:bg-muted/50"
+                  isActive ? "bg-indigo-500 shadow-lg" : "hover:bg-muted/50"
                 )}
               >
                 {/* ... (Keep Avatar and Badge logic exactly as you had it before) ... */}
                 <div className="relative shrink-0">
                   <Avatar className="h-10 w-10 border border-black/5">
                     <AvatarImage src={chat.avatar} />
-                    <AvatarFallback className={isActive ? "bg-purple-400 text-white" : ""}>
+                    <AvatarFallback className={isActive ? "bg-indigo-400 text-white" : ""}>
                        {chat.name[0]}
                     </AvatarFallback>
                   </Avatar>
@@ -329,7 +329,7 @@ function ConversationSidebar({ selectedId, onSelect }: SidebarProps) {
                   <p className={cn("truncate text-sm font-bold", isActive ? "text-white" : "text-foreground")}>
                     {chat.name}
                   </p>
-                  <p className={cn("truncate text-[11px] mt-2", isActive ? "text-purple-50" : "text-muted-foreground")}>
+                  <p className={cn("truncate text-[11px] mt-2", isActive ? "text-indigo-50" : "text-muted-foreground")}>
                     {chat.preview}
                   </p>
                 </div>
