@@ -5,8 +5,9 @@ import { Badge } from './ui/badge'
 import { Button } from './ui/button'
 import { Separator } from './ui/separator'
 import { ArrowRight, MessageCircle } from 'lucide-react'
+import { Lead } from '@/types/database'
 
-function RecentLeads() {
+function RecentLeads({recentLeads}:{recentLeads:Lead[]}) {
   // Dummy data - replace with actual data source
   const leads = [
     {
@@ -35,6 +36,7 @@ function RecentLeads() {
     }
   ]
 
+//   console.log(recentLeads)
   return (
     <div className=''>
         <Card > 
@@ -47,6 +49,43 @@ function RecentLeads() {
             </CardHeader>
             <CardContent>
                 <div className="space-y-4 ">
+                    {recentLeads.map((lead, index) => (
+                        <React.Fragment key={lead.id}>
+                            <div className="flex items-center justify-between ">
+                                <div className="flex items-center gap-3">
+                                    <Avatar size="default">
+                                        <AvatarImage src={lead.id} alt={lead.name} />
+                                        <AvatarFallback>{lead.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                                    </Avatar>
+                                    <div>
+                                        <div className="flex items-center gap-2">
+                                            <p className="font-medium text-sm">{lead.name}</p>
+                                            <Badge className={`text-xs ${
+                                                lead.status === 'new' 
+                                                    ? 'bg-green-100 text-green-800 border-green-200' 
+                                                    : lead.status === 'contacted' 
+                                                    ? 'bg-blue-100 text-blue-800 border-blue-200' 
+                                                    : 'bg-purple-100 text-purple-800 border-purple-200'
+                                            }`}>
+                                                {lead.status}
+                                            </Badge>
+                                        </div>
+                                        <p className="text-xs text-muted-foreground">
+                                            {lead.course_interest} • {lead.gender}
+                                        </p>
+                                    </div>
+                                </div>
+                                <Button size="sm" variant="outline" className="bg-green-100 text-green-800 hover:bg-green-300 border-green-300">
+                                    Open Chat
+                                    <MessageCircle className="ml-2 h-4 w-4" />
+                                </Button>
+                            </div>
+                            {index < recentLeads.length - 1 && <Separator />}
+                        </React.Fragment>
+                    ))}
+                </div>
+                {/* Rendering mock data */}
+                {/* <div className="space-y-4 ">
                     {leads.map((lead, index) => (
                         <React.Fragment key={lead.id}>
                             <div className="flex items-center justify-between ">
@@ -81,7 +120,7 @@ function RecentLeads() {
                             {index < leads.length - 1 && <Separator />}
                         </React.Fragment>
                     ))}
-                </div>
+                </div> */}
             </CardContent>
         </Card>
 

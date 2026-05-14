@@ -25,7 +25,16 @@ const messages: Message[] = [
   { id: '8', senderName: 'AI · Prudle', content: 'Our team will contact you regarding your inquiry.', timestamp: '10:18', isUser: false, status: 'escalated' },
 ];
 
-function ChatMessages() {
+interface MessagesProps {
+  messages:{
+    id: any;
+    role: any;
+    content: any;
+    type: any;
+    created_at: any;
+}[]
+}
+function ChatMessages({messages}:MessagesProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -53,19 +62,19 @@ function ChatMessages() {
               key={`${msg.id}-${index}`}
               className={cn(
                 "flex flex-col max-w-[85%] sm:max-w-[75%]",
-                msg.isUser ? "ml-auto items-end" : "mr-auto items-start"
+                msg.role == "human" ? "ml-auto items-end" : "mr-auto items-start"
               )}
             >
               {/* Sender Name */}
               <span className="text-[11px] font-medium text-muted-foreground/70 mb-1.5 px-1 uppercase tracking-wider">
-                {msg.senderName}
+                {msg.id}
               </span>
 
               {/* Message Bubble */}
               <div
                 className={cn(
                   "px-4 py-3 rounded-2xl text-[13px] shadow-sm leading-relaxed",
-                  msg.isUser 
+                  msg.role == "human" 
                     ? "bg-indigo-100d bg-muted text-indigo-950 rounded-tr-none border border-indigo-100" 
                     : "bg-indigo-100 text-indigo-700 rounded-tl-none shadow-md shadow-slate-200/50"
                 )}
@@ -75,11 +84,11 @@ function ChatMessages() {
               
               {/* Footer: Time & Status */}
               <div className="flex items-center gap-1.5 mt-1.5 px-1">
-                {msg.isUser && <Check className="w-3.5 h-3.5 text-indigo-400" />}
+                {msg.role == "human" && <Check className="w-3.5 h-3.5 text-indigo-400" />}
                 <span className="text-[10px] font-medium text-muted-foreground">
-                  {msg.timestamp}
+                  {msg.created_at}
                 </span>
-                {msg.status && (
+                {/* {msg.status && (
                   <>
                     <span className="text-[10px] text-muted-foreground/50">•</span>
                     <span className={cn(
@@ -89,7 +98,7 @@ function ChatMessages() {
                       {msg.status}
                     </span>
                   </>
-                )}
+                )} */}
               </div>
             </div>
           ))}

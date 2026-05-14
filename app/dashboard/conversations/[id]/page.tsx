@@ -1,0 +1,18 @@
+import ConversationContent from "@/components/conversation-content"
+import { ChatService } from "@/services/chat.service"
+import { id } from "zod/locales"
+
+export default async function ChatPage({
+  params,
+}: {
+  params: Promise<{ id: any }>
+}) {
+
+    const {id} = await params
+    console.log(id)
+
+    
+  return (
+    <ConversationContent chatId={id} />
+  )
+}

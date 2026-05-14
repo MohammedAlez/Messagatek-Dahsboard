@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { 
   TrendingUpIcon, 
   TrendingDownIcon, 
@@ -11,43 +11,77 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
+import { useRealtimeStats } from "@/hooks/use-realtime-stats";
 
-const cards = [
-  {
-    label: "Conversations Today",
-    value: "27",
-    trend: { value: "+12.5%", direction: "up" },
-    icon: MessageSquare,
-    iconBg: "bg-purple-500/10",
-    iconColor: "text-purple-600",
-  },
-  {
-    label: "Leads Captured",
-    value: "3",
-    trend: { value: "+3%", direction: "up" },
-    icon: UserPlus,
-    iconBg: "bg-emerald-500/10",
-    iconColor: "text-emerald-600",
-  },
-  {
-    label: "AI Handled",
-    value: "83%",
-    trend: null, // No trend for this one based on your original file
-    icon: Bot,
-    iconBg: "bg-blue-500/10",
-    iconColor: "text-blue-600",
-  },
-  {
-    label: "Escalated to Team",
-    value: "7",
-    trend: { value: "+2%", direction: "down" }, // Using down as requested for comparison
-    icon: AlertCircle,
-    iconBg: "bg-orange-500/10",
-    iconColor: "text-orange-600",
-  },
-]
 
-export function SectionCards() {
+
+
+type Stats = {
+    conversationsToday: number;
+    leadsCaptured: number;
+    escalatedCount: number;
+    aiHandledRate: number;
+    trends: {
+        conversations: string;
+        leads: string;
+        aiRate: string;
+        escalated: string;
+    };
+}
+
+export function SectionCards({stats:initialStats}:{stats:Stats}) {
+
+  const { newLeadCount} = useRealtimeStats()
+  const [stats, setStats] = useState(initialStats)
+
+
+  useEffect(()=>{
+    if(newLeadCount>0){
+      setStats(prev=>(
+        {
+          ...prev,
+          leadsCaptured:prev.leadsCaptured + newLeadCount
+        }
+      ))
+    }
+  },[newLeadCount])
+
+
+  console.log("stats", stats)
+  const cards = [
+    {
+      label: "Conversations Today",
+      value: stats.conversationsToday,
+      trend: { value: stats.trends.conversations, direction: Number.parseInt(stats.trends.conversations)>=0 ? "up":'down' },
+      icon: MessageSquare,
+      iconBg: "bg-purple-500/10",
+      iconColor: "text-purple-600",
+    },
+    {
+      label: "Leads Captured",
+      value: stats.leadsCaptured,
+      trend: { value: stats.trends.leads, direction: Number.parseInt(stats.trends.leads)>=0 ? "up":'down' },
+      icon: UserPlus,
+      iconBg: "bg-emerald-500/10",
+      iconColor: "text-emerald-600",
+    },
+    {
+      label: "AI Handled",
+      value: stats.aiHandledRate + "%",
+      trend: { value: stats.trends.aiRate, direction: Number.parseInt(stats.trends.aiRate)>=0 ? "up":'down' }, // No trend for this one based on your original file
+      icon: Bot,
+      iconBg: "bg-blue-500/10",
+      iconColor: "text-blue-600",
+    },
+    {
+      label: "Escalated to Team",
+      value: stats.escalatedCount,
+      trend: { value: stats.trends.escalated, direction: Number.parseInt(stats.trends.escalated)>=0 ? "up":'down' }, // Using down as requested for comparison
+      icon: AlertCircle,
+      iconBg: "bg-orange-500/10",
+      iconColor: "text-orange-600",
+    },
+  ]
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-4 lg:px-6 py-4">
       {cards.map((card) => {
