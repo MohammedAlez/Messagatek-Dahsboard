@@ -5,19 +5,60 @@ import { Send, MessageCircle, X, Sparkles } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
+import { ChatService } from '@/services/chat.service';
+import { useRouter } from 'next/navigation';
+import { Spinner } from "@/components/ui/spinner"
 
-function ChatInput() {
+
+interface ChatInputProps {
+  chatId:string
+  setMessages: React.Dispatch<React.SetStateAction<{
+      id: any;
+      role: any;
+      content: any;
+      type: any;
+      created_at: any;
+  }[]>>
+}
+function ChatInput({chatId, setMessages}:ChatInputProps) {
+
+
   const [isReplying, setIsReplying] = useState(false);
   const [message, setMessage] = useState("");
+  const [isSending, setIsSending] = useState(false)
 
-  const handleSend = () => {
-    if (!message.trim()) return;
+  const router = useRouter()
+
+  const handleSend = async() => {
+    if (!message.trim() || isSending) return;
     console.log("Sending message:", message);
+
+    const optimisticMessage = {
+      id: crypto.randomUUID(),
+      content: message,
+      role: "human-assistant",
+      created_at: new Date().toISOString() ,
+      type:"",
+      isSending:true
+    }
+
+
+    // setIsSending(true)
     setMessage("");
+    setMessages(prev => [...prev, optimisticMessage])
+
+
+    await ChatService.sendMessage(chatId, message)
+    // setIsSending(false)
+    router.refresh()
+
+
+    
     // Optional: Return to button state after sending
     // setIsReplying(false); 
   };
 
+  
   return (
     <div className="p-4 border-td border-border bg-background">
       <div className="max-w-4xl mx-auto relative flex justify-center items-center h-12 lg:h-14">
@@ -56,7 +97,7 @@ function ChatInput() {
                 onClick={() => setIsReplying(false)}
                 className="shrink-0 size-10 lg:size-11 active:scale-95 bg-indigo-600 hover:bg-indigo-600 cursor-pointer text-muted-foreground hover:text-foreground rounded-xl"
               >
-                <Sparkles className="size-4 lg:size-5 text-white" />
+                  <Sparkles className="size-4 lg:size-5 text-white" />
               </Button>
 
               <div className="relative flex-1 flex items-center gap-2">
@@ -80,6 +121,10 @@ function ChatInput() {
                     disabled={!message.trim()}
                     className="bg-indigo-600 active:scale-95 hover:bg-indigo-700 shrink-0 size-10 lg:size-11 rounded-xl shadow-md disabled:opacity-50 transition-all"
                   >
+                    {/* {isSending 
+                      ? <Spinner />
+                      : <Send className="size-4 lg:size-5 text-white" />
+                    } */}
                     <Send className="size-4 lg:size-5 text-white" />
                   </Button>
                 </motion.div>

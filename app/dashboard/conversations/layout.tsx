@@ -9,6 +9,7 @@ export default async function ConversationsLayout({
 }) {
   const conversations = await ChatService.getConversations()
 
+  console.log(conversations)
   return (
     <div className="">
         <SiteHeader title="Conversations" />

@@ -100,4 +100,58 @@ export const ChatService = {
 
     return data;
   },
+
+  async getChatHeaderInfo(contactId: string) {
+    const { data, error } = await supabase
+      .from('contacts')
+      .select(`
+        platform_id,
+        ai_paused,
+        users (
+          name
+        )
+      `)
+      .eq('id', contactId)
+      .single(); // Since contactId is a primary key, we want a single object returned
+
+    if (error) {
+      console.error(`Error fetching chat header info for contact ${contactId}:`, error);
+      throw error;
+    }
+
+    if (!data) return null;
+
+    // Handle single object or array nesting based on how Supabase reads the users table relation
+    const userObj = Array.isArray(data.users) ? data.users[0] : data.users;
+
+    return {
+      customerName: userObj?.name || data.platform_id || 'Unknown Customer',
+      customerPhone: data.platform_id || 'Unknown Handle',
+      isAiPaused: data.ai_paused || false
+    };
+  },
+
+  async sendMessage(contactId: string, content: string, type: string = 'text') {
+    if (!content.trim()) return null;
+
+    const { data, error } = await supabase
+      .from('messages')
+      .insert([
+        {
+          contact_id: contactId,
+          content: content.trim(),
+          role: 'human-assistant', // Explicitly marked so the UI renders it on the right side
+          type: type,
+        }
+      ])
+      .select()
+      .single();
+
+    if (error) {
+      console.error(`Error saving manual message for contact ${contactId}:`, error);
+      throw error;
+    }
+
+    return data;
+  }
 };

@@ -2,7 +2,7 @@ import { ChartAreaInteractive } from "@/components/chart-area-interactive"
 import { DataTable } from "@/components/data-table"
 import { SectionCards } from "@/components/section-cards"
 
-import data from "./data.json"
+import data from "../data.json"
 import RecentLeads from "@/components/recent-leads"
 import UnansweredQuestions from "@/components/unanswered-questions"
 import SystemStatus from "@/components/system-status"

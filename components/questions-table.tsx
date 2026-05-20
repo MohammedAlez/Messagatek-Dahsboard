@@ -16,7 +16,21 @@ const questions = [
 ]
 
 
-export function QuestionsTable() {
+interface QuestionProps {
+  id: any;
+  question: any;
+  status: any;
+  date: any;
+  contactId: any;
+  customerName: any;
+  customerPhone: any;
+  courseInterest: any;
+}
+
+export function QuestionsTable({data}:{data:QuestionProps[]}) {
+
+  console.log("Questions unanswered", data)
+  const questions = data
   return (
     <div className="rounded-lg border border-border bg-card overflow-hidden">
       <Table>
@@ -40,18 +54,18 @@ export function QuestionsTable() {
                         <AvatarFallback className="bg-muted text-muted-foreground text-xs font-medium">SA</AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col gap-0.5">
-                    <span className="text-sm font-medium text-foreground">{item.name}</span>
-                    <span className="text-xs text-muted-foreground">{item.phone}</span>
+                    <span className="text-sm font-medium text-foreground">{item.customerName}</span>
+                    <span className="text-xs text-muted-foreground">{item.customerPhone}</span>
                     </div>
                 </div>
                 </TableCell>
                 <TableCell>
                 <div className="flex flex-col gap-0.5">
                     <span className="text-sm font-medium text-foreground ">{item.question.slice(0,29)}...</span>
-                    <span className="text-[10px] text-muted-foreground italic">{item.meta}</span>
+                    <span className="text-[10px] text-muted-foreground italic">asked via text</span>
                 </div>
                 </TableCell>
-                <TableCell className="text-sm text-muted-foreground">{item.date}</TableCell>
+                <TableCell className="text-sm text-muted-foreground">{(item.date as String).slice(0,10)}</TableCell>
                 <TableCell>
                 <Badge variant="outline" className="bg-orange-500/10 text-orange-500 border-none px-2.5 py-0.5 font-normal capitalize">{item.status}</Badge>
                 </TableCell>

@@ -45,12 +45,53 @@ const cards = [
   },
 ]
 
-export function LeadsCards() {
+interface StatsProps {
+    total: number;
+    new: number;
+    contacted: number;
+    enrolled: number;
+}
+
+export function LeadsCards({data}:{data:StatsProps}) {
+
+  console.log("leads screen lead", data)
+
+  const cards = [
+  {
+    label:     "Total Leads",
+    value:     data.total,
+    icon:      Users,
+    iconBg:    "bg-orange-500/20",
+    iconColor: "text-orange-400",
+  },
+  {
+    label:     "New",
+    value:     data.new,
+    icon:      UserPlus,
+    iconBg:    "bg-violet-500/20",
+    iconColor: "text-violet-400",
+  },
+  {
+    label:     "Contacted",
+    value:     data.contacted,
+    icon:      PhoneCall,
+    iconBg:    "bg-amber-500/20",
+    iconColor: "text-amber-400",
+  },
+  {
+    label:     "Enrolled",
+    value:     data.enrolled,
+    icon:      GraduationCap,
+    iconBg:    "bg-emerald-500/20",
+    iconColor: "text-emerald-400",
+  },
+]
+  
+
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
       {cards.map((card) => {
         const Icon = card.icon
-        const isUp = card.trend.direction === "up"
         return (
           <div
             key={card.label}

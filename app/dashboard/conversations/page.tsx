@@ -5,7 +5,7 @@ import { ChatService } from "@/services/chat.service"
 
 async function Page() {
   // Fetch on the server
-  const initialChats = await ChatService.getConversations()
+  // const initialChats = await ChatService.getConversations()
 
   return (
     <>

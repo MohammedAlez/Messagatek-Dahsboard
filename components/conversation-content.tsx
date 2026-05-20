@@ -12,10 +12,14 @@ import { ChatService } from '@/services/chat.service'
 
 interface ContentProps {
   chatId: string;
-  
+  userInfo: {
+      customerName: any;
+      customerPhone: any;
+      isAiPaused: any;
+  } | null
 }
 
-async function ConversationContent({ chatId }: ContentProps) {
+async function ConversationContent({ chatId, userInfo }: ContentProps) {
 
 
   const data = await ChatService.getMessages(chatId)
@@ -34,17 +38,20 @@ async function ConversationContent({ chatId }: ContentProps) {
                 <ChevronLeft className="w-6 h-6 text-foreground" />
               </Link>
               <div className="flex-1">
-                  <ChatHeader />
+                  <ChatHeader userInfo={userInfo}/>
               </div>
           </div>
           
-          <div className="flex-1 min-h-0 bg-slate-50/30"> 
-            <ChatMessages messages={data}/>
-          </div>
           
-          <div className="p-2 bg-background border-t">
-            <ChatInput />
-          </div>
+          <ChatMessages initialMessages={data} chatId={chatId}/>
+
+          {/* <div className="flex-1 min-h-0 bg-slate-50/30"> 
+            <ChatMessages initialMessages={data} chatId={chatId}/>
+          </div> */}
+          
+          {/* <div className="p-2 bg-background border-t">
+            <ChatInput chatId={chatId}/>
+          </div> */}
       </div>
     )
 }

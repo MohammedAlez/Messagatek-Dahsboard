@@ -11,8 +11,9 @@ export default async function ChatPage({
     const {id} = await params
     console.log(id)
 
+    const userInfo = await ChatService.getChatHeaderInfo(id)
     
   return (
-    <ConversationContent chatId={id} />
+    <ConversationContent chatId={id} userInfo={userInfo}/>
   )
 }

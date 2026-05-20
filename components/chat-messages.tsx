@@ -1,9 +1,10 @@
 'use client'
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
+import ChatInput from './chat-input';
 
 interface Message {
   id: string;
@@ -26,16 +27,21 @@ const messages: Message[] = [
 ];
 
 interface MessagesProps {
-  messages:{
+  initialMessages:{
     id: any;
     role: any;
     content: any;
     type: any;
     created_at: any;
-}[]
+    isSending?:boolean
+  }[]
+
+  chatId:string
 }
-function ChatMessages({messages}:MessagesProps) {
+function ChatMessages({initialMessages, chatId}:MessagesProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const [messages, setMessages] = useState(initialMessages)
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -44,67 +50,74 @@ function ChatMessages({messages}:MessagesProps) {
         scrollContainer.scrollTop = scrollContainer.scrollHeight;
       }
     }
-  }, []);
+  }, [messages.length]);
 
   return (
-    <div className="relative h-full w-full bg-[#F8FAFC]">
-      <ScrollArea 
-        ref={scrollRef} 
-        className="h-full w-full p-4"
-        style={{
-          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)',
-          maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)',
-        }}
-      >
-        <div className="flex flex-col gap-6 py-8">
-          {messages.map((msg, index) => (
-            <div
-              key={`${msg.id}-${index}`}
-              className={cn(
-                "flex flex-col max-w-[85%] sm:max-w-[75%]",
-                msg.role == "human" ? "ml-auto items-end" : "mr-auto items-start"
-              )}
-            >
-              {/* Sender Name */}
-              <span className="text-[11px] font-medium text-muted-foreground/70 mb-1.5 px-1 uppercase tracking-wider">
-                {msg.id}
-              </span>
+    <>
+      <div className="flex-1 min-h-0 bg-slate-50/30"> 
+        <div className="relative h-full w-full bg-[#F8FAFC]">
+          <ScrollArea 
+            ref={scrollRef} 
+            className="h-full w-full p-4"
+            style={{
+              WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)',
+              maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)',
+            }}
+          >
+            <div className="flex flex-col gap-6 py-8">
+              {messages.map((msg, index) => (
+                <div
+                  key={`${msg.id}-${index}`}
+                  className={cn(
+                    "flex flex-col max-w-[85%] sm:max-w-[75%]",
+                    msg.role == "human" ? "ml-auto items-end" : "mr-auto items-start"
+                  )}
+                >
+                  {/* Sender Name */}
+                  <span className="text-[11px] font-medium text-muted-foreground/70 mb-1.5 px-1 uppercase tracking-wider">
+                    {/* {msg.id} */}
+                  </span>
 
-              {/* Message Bubble */}
-              <div
-                className={cn(
-                  "px-4 py-3 rounded-2xl text-[13px] shadow-sm leading-relaxed",
-                  msg.role == "human" 
-                    ? "bg-indigo-100d bg-muted text-indigo-950 rounded-tr-none border border-indigo-100" 
-                    : "bg-indigo-100 text-indigo-700 rounded-tl-none shadow-md shadow-slate-200/50"
-                )}
-              >
-                {msg.content}
-              </div>
-              
-              {/* Footer: Time & Status */}
-              <div className="flex items-center gap-1.5 mt-1.5 px-1">
-                {msg.role == "human" && <Check className="w-3.5 h-3.5 text-indigo-400" />}
-                <span className="text-[10px] font-medium text-muted-foreground">
-                  {msg.created_at}
-                </span>
-                {/* {msg.status && (
-                  <>
-                    <span className="text-[10px] text-muted-foreground/50">•</span>
-                    <span className={cn(
-                      "text-[10px] font-semibold uppercase tracking-tight",
-                      msg.status === 'escalated' ? "text-amber-600" : "text-muted-foreground"
-                    )}>
-                      {msg.status}
+                  {/* Message Bubble */}
+                  <div
+                    className={cn(
+                      "px-4 py-3 rounded-2xl text-[13px] shadow-sm leading-relaxed",
+                      msg.role == "human" 
+                        ? "bg-indigo-100d bg-muted text-indigo-950 rounded-tr-none border border-indigo-100" 
+                        : "bg-indigo-100 text-indigo-700 rounded-tl-none shadow-md shadow-slate-200/50"
+                    )}
+                  >
+                    {msg.content}
+                  </div>
+                  
+                  {/* Footer: Time & Status */}
+                  <div className="flex items-center gap-1.5 mt-1.5 px-1">
+                    {msg.role == "human" && <Check className="w-3.5 h-3.5 text-indigo-400" />}
+                    <span className="text-[10px] font-medium text-muted-foreground">
+                      {(msg.created_at as String).slice(0,10) + " - " + (msg.created_at as String).slice(11,16)}
                     </span>
-                  </>
-                )} */}
-              </div>
+                    {/* {msg.status && (
+                      <>
+                        <span className="text-[10px] text-muted-foreground/50">•</span>
+                        <span className={cn(
+                          "text-[10px] font-semibold uppercase tracking-tight",
+                          msg.status === 'escalated' ? "text-amber-600" : "text-muted-foreground"
+                        )}>
+                          {msg.status}
+                        </span>
+                      </>
+                    )} */}
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </ScrollArea>
         </div>
-      </ScrollArea>
-    </div>
+      </div>
+      <div className="p-2 bg-background border-t">
+        <ChatInput chatId={chatId} setMessages={setMessages}/>
+      </div>
+    </>
   );
 }
 

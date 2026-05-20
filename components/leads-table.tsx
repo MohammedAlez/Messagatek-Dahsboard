@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   Table,
   TableBody,
@@ -66,7 +65,28 @@ const leads = [
   },
 ]
 
-export function LeadsTable() {
+
+interface LeadProps {
+    id: any;
+    name: any;
+    course_interest: any;
+    gender: any;
+    source: any;
+    status: any;
+    date: any;
+    phone: any;
+    contact_id: any;
+    contacts: {
+        platform_id: any;
+    }[];
+}
+
+
+export function LeadsTable({data}:{data:LeadProps[]}) {
+
+  console.log("leads", data)
+
+  const leads = data
   return (
     <div className="rounded-lg border border-border bg-card overflow-hidden">
       <Table className=''>
@@ -127,7 +147,7 @@ export function LeadsTable() {
 
               {/* Course */}
               <TableCell className="text-sm text-foreground font-medium">
-                {lead.course}
+                {lead.course_interest}
               </TableCell>
 
               {/* Gender */}
