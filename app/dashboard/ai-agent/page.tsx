@@ -1,16 +1,63 @@
 import React from 'react'
+import { SiteHeader } from '@/components/site-header'
+import { AiAgentCards } from '@/components/ai-agent-cards'
+import { SystemPrompt } from '@/components/system-prompt'
+import { TestAi } from '@/components/test-ai'
+import { AiControls } from '@/components/agent-controls'
+import { AgentPerformance } from '@/components/agent-performance'
 
-function Page() {
+// Upcoming components to build
+// import { ModelConfigCard } from '@/components/model-config-card'
+// import { ControlsCard } from '@/components/controls-card'
+// import { PerformanceCard } from '@/components/performance-card'
+
+export default function Page() {
+  // Mock data for the cards to prevent TypeScript errors based on our previous setup
+  const statsData = {
+    numberOfChats: 15,
+    totalLeadsCaptured: 3,
+    pausedByAgent: 0,
+    pausedByUsers: 3
+  }
+
   return (
-    <div className="flex flex-1 flex-col">
-      <div className="@container/main flex flex-1 flex-col gap-2">
-        <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-          <h1 className="text-2xl font-bold">AI Agent</h1>
-          {/* Add your AI agent content here */}
+    <>
+      <SiteHeader title='AI Agent Settings' />
+      
+      <main className="container mx-auto px-4 py-6 flex flex-col gap-6">
+        
+        {/* Top Stats Cards */}
+        <AiAgentCards />
+
+        {/* Main Grid Layout (12 Columns)
+          This gives us perfect control over the 66/33 and 50/50 splits on large screens,
+          while gracefully collapsing to a single column (100% width) on mobile.
+        */}
+        <div className="grid grid-cols-12 gap-6">
+          
+          {/* Top-Left: System Prompt (66% -> 8/12 columns) */}
+          <div className="col-span-12 lg:col-span-8">
+            <SystemPrompt />
+          </div>
+
+          {/* Top-Right: Test AI / Model Config (33% -> 4/12 columns) */}
+          <div className="col-span-12 lg:col-span-4">
+            {/* <ModelConfigCard /> */}
+            <TestAi />
+          </div>
+
+          {/* Bottom-Left: Controls (50% -> 6/12 columns) */}
+          <div className="col-span-12 lg:col-span-6">
+            <AiControls />
+          </div>
+
+          {/* Bottom-Right: Performance/Handoff (50% -> 6/12 columns) */}
+          <div className="col-span-12 lg:col-span-6">
+            <AgentPerformance />
+          </div>
+
         </div>
-      </div>
-    </div>
+      </main>
+    </>
   )
 }
-
-export default Page
